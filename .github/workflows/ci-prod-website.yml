@@ -6,16 +6,16 @@ name: wld ci/cd pipeline website/prod
 
 on:
   workflow_dispatch: {}
-#  push:
-#    branches: [ "development" ]
-#    paths:
-#      - cts-website/**
-#      - .github/workflows/ci-prod-website.yml
-#  pull_request:
-#    branches: [ "development" ]
-#    paths:
-#      - cts-website/**
-#      - .github/workflows/ci-prod-website.yml
+  push:
+    branches: [ "main" ]
+    paths:
+      - /**
+      - .github/workflows/ci-prod-website.yml
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - /**
+      - .github/workflows/ci-prod-website.yml
 
 permissions:
   actions: read       # Allows reading and using actions from GitHub
