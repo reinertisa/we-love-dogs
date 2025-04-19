@@ -1,0 +1,49 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ccc;
+}
+
+.navbar-left {
+    color: black;
+}
+
+.company-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.company-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-right button {
+    margin-right: 1rem;
+    text-decoration: none;
+    background: black;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.navbar-right button:hover,
+.navbar-right a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+
