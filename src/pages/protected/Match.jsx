@@ -1,6 +1,7 @@
 import {useLocation, useNavigate} from "react-router";
 
 import './Match.css';
+import Button from "../../components/buttons/index.jsx";
 
 export default function MatchPage() {
     const navigate = useNavigate();
@@ -12,6 +13,8 @@ export default function MatchPage() {
         return null;
     }
 
+    const handleNavigate = () => navigate(-1)
+
     return (
         <div className="dog-profile-container">
             <div className="dog-card">
@@ -20,10 +23,9 @@ export default function MatchPage() {
                 <p><strong>Age:</strong> {age}</p>
                 <p><strong>Breed:</strong> {breed}</p>
                 <p><strong>Zip Code:</strong> {zipCode}</p>
-
-                <button className="go-back-button" onClick={() => navigate(-1)}>
+                <Button className="go-back-button" actionHandler={handleNavigate}>
                     ← Go Back
-                </button>
+                </Button>
             </div>
         </div>
     );

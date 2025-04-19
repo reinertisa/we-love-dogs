@@ -24,8 +24,6 @@ export default function ListPage({data, setSelectedDogs, selectedDogs}) {
         pageSize: 10, // 👈 Show 10 rows per page
     });
 
-    // const [selectedDogs, setSelectedDogs] = useState([]);
-
     const updateCheckbox = (checked, value) => {
         if (checked) {
             setSelectedDogs([...selectedDogs, value]);

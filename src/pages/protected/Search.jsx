@@ -3,11 +3,15 @@ import axios from "axios";
 import {map} from "lodash";
 import ListPage from "./List.jsx";
 import {BASE_URL} from "../../constants.js";
-import {useForm} from "react-hook-form";
-import BreedSelect from "./BreedSelect.jsx";
-import ZipCodeSelect from "./ZipCodeSelect.jsx";
+import {FormProvider, useForm} from "react-hook-form";
+import BreedSelect from "../../components/form/BreedSelect.jsx";
+import ZipCodeSelect from "../../components/form/ZipCodeSelect.jsx";
 import pluralize from 'pluralize';
 import {useNavigate} from "react-router";
+import Button from "../../components/buttons/index.jsx";
+import FormText from "../../components/form/Text.jsx";
+import ErrorMessage from "../../components/errors/index.jsx";
+import Loading from "../../components/loading/index.jsx";
 
 import './Search.css';
 
@@ -32,11 +36,9 @@ export default function SearchPage() {
     const [count, setCount] = useState(initialCounter);
     const [error, setError] = useState('');
     const [selectedDogs, setSelectedDogs] = useState([]);
+    const [pending, setPending] = useState(false);
     const navigate = useNavigate();
 
-    const {handleSubmit, register, reset, control} = useForm({
-        defaultValues,
-    });
 
     useEffect(() => {
         const loadData = async () => {
@@ -70,7 +72,6 @@ export default function SearchPage() {
                 } else {
                     setDogData([]);
                 }
-
             } catch (err) {
                 setError(err);
             }
@@ -95,45 +96,27 @@ export default function SearchPage() {
         let content;
         if (searchResult.total > 100) {
             if (count.next >= searchResult.total) {
-                content = (
-                    <span className="total">Now, you can see all {searchResult.total} dogs.</span>
-                );
+                content = <span className="total">Now, you can see all {searchResult.total} dogs.</span>;
             } else {
                 content = (
                     <>
                         <span className="total">
-                            {searchResult.total} dogs found. {count.next} out of {searchResult.total} dogs displayed.
+                            {count.next} out of {searchResult.total} dogs displayed.
                             Do you want to see more?
                         </span>
-                        <button
-                            type="button"
-                            className="btn-load"
-                            onClick={setLoadHandler}
-                        >
+                        <Button type="button" className="btn-load" actionHandler={setLoadHandler}>
                             Please click here.
-                        </button>
+                        </Button>
                     </>
                 );
             }
         } else if (searchResult.total <= 100 && searchResult.total > 0) {
-            content = (
-                <span className="total">
-                    {searchResult.total} dogs found.
-                </span>
-            )
+            content = <span className="total">{searchResult.total} dogs found.</span>
         } else {
-            content = (
-                <span className="total">
-                    We did not find any dogs.
-                </span>
-            )
+            content = <span className="total">We did not find any dogs.</span>;
         }
 
-        return (
-            <div className="result-stats">
-                {content}
-            </div>
-        )
+        return <div className="result-stats">{content}</div>;
     }
 
     const matchHandler = async () => {
@@ -161,9 +144,9 @@ export default function SearchPage() {
     const renderSelectedDogs = () => {
         if (selectedDogs.length > 0) {
             return (
-                <button className="btn-selected" onClick={matchHandler}>
+                <Button className="btn-selected" actionHandler={matchHandler}>
                     {selectedDogs.length} {pluralize('dog', selectedDogs.length)} selected. Do you want to find a match?
-                </button>
+                </Button>
             );
         }
 
@@ -171,6 +154,7 @@ export default function SearchPage() {
 
     const onSubmit = async (values) => {
         try {
+            setPending(true);
             const rez = await axios.get(`${BASE_URL}/dogs/search`, {
                 params: {
                     breeds: map(values?.breeds, (breed) => breed.value),
@@ -190,56 +174,63 @@ export default function SearchPage() {
             });
             setCount(initialCounter);
             setLoad(false);
+            setPending(false);
         } catch (err) {
             setError(err);
         }
     }
 
+    const formMethods = useForm({
+        defaultValues,
+    });
+
+    const {handleSubmit, reset, control} = formMethods;
+
     const handleReset = () => {
-        reset(defaultValues); // resets to initial state
+        reset(defaultValues); // resets to the initial state
     };
 
-    let body = <p>We are loading lovely dogs for you. Please wait for them...</p>
+    let body = <Loading />
     if (breedOptions?.length > 0) {
         body = (
             <>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div>
-                        <label htmlFor="breed-select">Breeds</label>
+                <FormProvider {...formMethods}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <BreedSelect control={control} name="breeds" options={breedOptions} />
-                    </div>
-                    <div>
-                        <label htmlFor="zip-select">Zip codes</label>
                         <ZipCodeSelect control={control} name="zipCodes" />
-                    </div>
-                    <div className="input-age">
-                        <div>
-                            <label htmlFor="ageMin">Min age</label>
-                            <input id="ageMin" type="number" {...register('ageMin')} min={0} max={20} />
+                        <div className="input-age">
+                            <FormText name="ageMin" label="Min age" type="number" min={0} max={20} />
+                            <FormText name="ageMax" label="Max age" type="number" min={0} max={20} />
                         </div>
-                        <div>
-                            <label htmlFor="ageMax">Max age</label>
-                            <input id="ageMax" type="number" {...register('ageMax')} min={0} max={20} />
+                        <div className="btn">
+                            <Button type="reset" actionHandler={handleReset}>Reset</Button>
+                            <Button type="submit">Search</Button>
                         </div>
-                    </div>
-                    <div className="btn">
-                        <button type="reset" onClick={handleReset}>Reset</button>
-                        <button type="submit">Go</button>
-                    </div>
-                </form>
+                    </form>
+                </FormProvider>
                 {renderStats()}
                 {renderSelectedDogs()}
-                {dogData?.length > 0 && <ListPage data={dogData} setSelectedDogs={setSelectedDogs} selectedDogs={selectedDogs} />}
+                {renderDogData(dogData, setSelectedDogs, selectedDogs, pending)}
             </>
         );
     } else if (error) {
-        body = <p className="error">Something went wrong. Please try again.</p>
+        body = <ErrorMessage message={error} />
     }
-
-    return (
-        <div>
-            {body}
-        </div>
-    )
+    return <div>{body}</div>
 }
 
+
+function renderDogData(dogData, setSelectedDogs, selectedDogs, pending = false) {
+    if (pending) {
+        return <Loading />
+    }
+
+    if (dogData?.length > 0) {
+        return (
+            <ListPage
+                data={dogData}
+                setSelectedDogs={setSelectedDogs}
+                selectedDogs={selectedDogs} />
+        );
+    }
+}
