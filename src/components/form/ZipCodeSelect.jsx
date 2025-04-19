@@ -42,17 +42,20 @@ export default function ZipCodeSelect({control, name}) {
     });
 
     return (
-        <AsyncSelect
-            inputId="zip-select"
-            cacheOptions
-            defaultOptions={false}
-            loadOptions={loadZipOptions}
-            onChange={onChange}
-            isMulti
-            value={value}
-            placeholder="Start typing a ZIP code"
-            isClearable
-            styles={customReactSelectStyles}
-        />
+        <div>
+            <label htmlFor="zip-select">Zip codes</label>
+            <AsyncSelect
+                inputId="zip-select"
+                cacheOptions
+                defaultOptions={false}
+                loadOptions={loadZipOptions}
+                onChange={onChange}
+                isMulti
+                value={value}
+                placeholder="Start typing a ZIP code"
+                isClearable
+                styles={customReactSelectStyles}
+            />
+        </div>
     );
 }
