@@ -1,0 +1,12 @@
+
+.loading {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: rgba(62, 76, 108, 0.5);
+  fill: rgba(62, 76, 108, 0.5);
+
+  span {
+    padding-left: 0.5em;
+    vertical-align: top;
+  }
+}
