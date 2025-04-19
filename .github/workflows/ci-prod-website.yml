@@ -31,6 +31,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install dependencies
+        run: yarn install
+
       - name: Build the project
         run: |
           yarn --immutable
