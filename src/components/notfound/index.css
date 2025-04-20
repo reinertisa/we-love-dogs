@@ -1,15 +1,49 @@
 .notfound-container {
     text-align: center;
-    padding: 5rem 2rem;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .notfound-container h1 {
-    font-size: 5rem;
-    margin-bottom: 1rem;
+    font-size: 4rem;
+    color: #ff6b6b;
 }
 
-.notfound-container a {
-    color: #007bff;
+.notfound-container p {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: #555;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
+}
+
+.back-link:hover {
+    background-color: #0056b3;
+}
+
+/* Image layout */
+.notfound-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.notfound-images img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
