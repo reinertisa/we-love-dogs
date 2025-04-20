@@ -15,7 +15,7 @@ const initialCounter = {
     next: 100,
 };
 
-export default function ListPage({searchResult}) {
+export default function ListPage({searchResult, pending}) {
     const [data, setData] = useState(null);
     const [count, setCount] = useState(initialCounter);
     const [load, setLoad] = useState(false);
@@ -68,15 +68,13 @@ export default function ListPage({searchResult}) {
         setLoad(true);
     }
 
-
     if (Object.keys(searchResult).length === 0) {
         return null;
     }
 
-    const {total} = searchResult;
     let body = <Loading />;
-
-    if (Object.keys(searchResult).length > 0) {
+    if (!pending) {
+        const {total} = searchResult;
         let content;
         if (total > 0) {
             if (total > 100) {

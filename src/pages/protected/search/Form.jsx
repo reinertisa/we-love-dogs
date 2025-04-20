@@ -22,11 +22,13 @@ const defaultValues = {
 
 export default function SearchForm({breedOptions}) {
     const [searchResult, setSearchResult] = useState({});
+    const [pending, setPending] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const onSubmit = async (values) => {
         try {
+            setPending(true);
             const rez = await axios.get(`${BASE_URL}/dogs/search`, {
                 params: {
                     breeds: map(values?.breeds, (breed) => breed.value),
@@ -39,11 +41,13 @@ export default function SearchForm({breedOptions}) {
                 withCredentials: true,
             });
 
+            setPending(false);
             const {resultIds, total} = rez.data;
             setSearchResult({
                 resultIds,
                 total,
             });
+
         } catch (err) {
             if (err.response?.status === 401) {
                 localStorage.removeItem('login');
@@ -80,7 +84,7 @@ export default function SearchForm({breedOptions}) {
                 </form>
                 <ErrorMessage message={error} />
             </FormProvider>
-            <ListPage searchResult={searchResult} />
+            <ListPage searchResult={searchResult} pending={pending} />
         </>
     )
 }

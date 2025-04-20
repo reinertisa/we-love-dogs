@@ -9,7 +9,6 @@ import {useNavigate} from "react-router";
 
 
 export default function SearchPage() {
-
     const [breedOptions, setBreedOptions] = useState([]);
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -39,5 +38,4 @@ export default function SearchPage() {
         body = <ErrorMessage message={error} />
     }
     return <div>{body}</div>
-
 }
