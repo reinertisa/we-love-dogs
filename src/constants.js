@@ -24,3 +24,5 @@ export const customReactSelectStyles = {
         overflow: 'hidden',
     }),
 };
+
+export const ERROR_MSG = 'Something went wrong. Please try again later.';

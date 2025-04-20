@@ -12,6 +12,9 @@ const defaultMessage = (
 );
 
 export default function ErrorMessage({title, message, className, style, ...otherProps}) {
+    if (!message) {
+        return null;
+    }
 
     const renderTitle = () => {
         if (title) {

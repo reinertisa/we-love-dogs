@@ -1,12 +1,10 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {BASE_URL} from "../../constants.js";
+import {BASE_URL, ERROR_MSG} from "../../../constants.js";
 import {NavLink, Outlet, useNavigate} from "react-router";
-import Button from "../../components/buttons/index.jsx";
-import ErrorMessage from "../../components/errors/index.jsx";
-
-
-import './Navbar.css';
+import Button from "../../../components/buttons/index.jsx";
+import ErrorMessage from "../../../components/errors/index.jsx";
+import './index.css';
 
 
 export default function Navbar() {
@@ -28,7 +26,11 @@ export default function Navbar() {
             });
             setLoggedOut(true)
         } catch (err) {
-            setError(err);
+            if (err.response?.status === 401) {
+                localStorage.removeItem('login');
+                navigate('/');
+            }
+            setError(ERROR_MSG);
         }
     };
     return (

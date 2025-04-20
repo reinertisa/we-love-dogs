@@ -1,0 +1,18 @@
+.match-container {
+    display: block;
+    text-align: center;
+}
+
+.match-selected {
+    background-color: #bb60da;
+    margin-bottom: 1rem;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-selected:hover {
+    background-color: #059669;
+}

@@ -2,12 +2,12 @@ import axios from "axios";
 import {FormProvider, useForm} from "react-hook-form";
 import {useNavigate} from "react-router";
 
-import './Login.css';
 import {useState} from "react";
-import FormText from "../../components/form/Text.jsx";
-import Button from "../../components/buttons/index.jsx";
-import {BASE_URL} from "../../constants.js";
-import ErrorMessage from "../../components/errors/index.jsx";
+import FormText from "../../../components/form/Text.jsx";
+import Button from "../../../components/buttons/index.jsx";
+import {BASE_URL, ERROR_MSG} from "../../../constants.js";
+import ErrorMessage from "../../../components/errors/index.jsx";
+import './index.css';
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -36,19 +36,22 @@ export default function LoginPage() {
                 navigate('/search');
             }
         } catch (err) {
-            console.log(err);
-                setError(err.response?.data);
+            if (err.response?.status === 401) {
+                localStorage.removeItem('login');
+                navigate('/');
+            }
+            setError(ERROR_MSG);
         }
     }
 
     return (
         <FormProvider {...formMethods}>
-        <form onSubmit={handleSubmit(onSubmit)} className="loginPage">
-            <FormText name="name" label="Name" />
-            <FormText name="email" label="Email" />
-            <Button type="submit">Login</Button>
-            {error && <ErrorMessage message={error} />}
-        </form>
+            <form onSubmit={handleSubmit(onSubmit)} className="loginPage">
+                <FormText name="name" label="Name" />
+                <FormText name="email" label="Email" />
+                <Button type="submit">Login</Button>
+                {error && <ErrorMessage message={error} />}
+            </form>
         </FormProvider>
     )
 }

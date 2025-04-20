@@ -1,7 +1,7 @@
 import {useLocation, useNavigate} from "react-router";
 
 import './Match.css';
-import Button from "../../components/buttons/index.jsx";
+import Button from "../../../components/buttons/index.jsx";
 
 export default function MatchPage() {
     const navigate = useNavigate();

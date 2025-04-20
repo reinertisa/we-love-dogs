@@ -8,11 +8,10 @@ import {
 import {useState} from "react";
 import {filter} from "lodash";
 
-import './List.css';
+import './Table.css';
 
 
-export default function ListPage({data, setSelectedDogs, selectedDogs}) {
-
+export default function TablePage({data, setSelectedDogs, selectedDogs}) {
     const [sorting, setSorting] = useState([
         {id: 'name', asc: true},
         {id: 'breed', asc: true},
