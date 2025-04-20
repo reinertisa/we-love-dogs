@@ -63,3 +63,8 @@
 .loginPage button[type="submit"]:hover {
     background-color: #0056b3;
 }
+
+.loginPage h3 {
+    color: black;
+    text-align: center;
+}

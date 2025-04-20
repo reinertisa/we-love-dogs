@@ -49,6 +49,7 @@ export default function LoginPage() {
             <div className="loginPage">
                 <FormProvider {...formMethods}>
                     <form onSubmit={handleSubmit(onSubmit)}>
+                        <h3>Log in to We Love Dogs</h3>
                         <FormText name="name" label="Name" />
                         <FormText name="email" label="Email" />
                         <Button type="submit">Login</Button>
