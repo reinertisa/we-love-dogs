@@ -45,13 +45,17 @@ export default function LoginPage() {
     }
 
     return (
-        <FormProvider {...formMethods}>
-            <form onSubmit={handleSubmit(onSubmit)} className="loginPage">
-                <FormText name="name" label="Name" />
-                <FormText name="email" label="Email" />
-                <Button type="submit">Login</Button>
-                {error && <ErrorMessage message={error} />}
-            </form>
-        </FormProvider>
+        <div className="loginPageWrapper">
+            <div className="loginPage">
+                <FormProvider {...formMethods}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <FormText name="name" label="Name" />
+                        <FormText name="email" label="Email" />
+                        <Button type="submit">Login</Button>
+                        {error && <ErrorMessage message={error} />}
+                    </form>
+                </FormProvider>
+            </div>
+        </div>
     )
 }

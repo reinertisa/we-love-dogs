@@ -66,7 +66,7 @@ export default function SearchForm({breedOptions}) {
     return (
         <>
             <FormProvider {...formMethods}>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)} className="search-form">
                     <BreedSelect control={control} name="breeds" options={breedOptions} />
                     <ZipCodeSelect control={control} name="zipCodes" />
                     <div className="input-age">

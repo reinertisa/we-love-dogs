@@ -87,7 +87,7 @@ export default function TablePage({data, setSelectedDogs, selectedDogs}) {
 
 
     return (
-        <div className="listPage">
+        <div className="tablePage">
             <table border="1" cellPadding="8" style={{ borderCollapse: 'collapse', width: '100%' }}>
                 <thead>
                 {table.getHeaderGroups().map(headerGroup => (

@@ -8,11 +8,15 @@
     margin-bottom: 1rem;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 20px;
     cursor: pointer;
-    transition: background 0.3s;
+
+    margin-top: 0.25rem;
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
 }
 
-.btn-selected:hover {
+.match-selected:hover {
     background-color: #059669;
 }

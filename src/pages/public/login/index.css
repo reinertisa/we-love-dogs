@@ -1,20 +1,32 @@
-.loginPage {
-    width: 100%;
-    max-width: 400px;
-    margin: 30rem auto;
-    padding: 1rem;
+/* Wrapper to center content on screen */
+.loginPageWrapper {
     display: flex;
-    flex-direction: column; /* stack items vertically on smaller screens */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* full height of the screen */
+    padding: 1rem; /* space for smaller screens */
     box-sizing: border-box;
 }
 
-.loginPage form {
+
+.loginPage {
     width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-.loginPage form div {
-    flex: 1;
-    margin-bottom: 1rem; /* add spacing between fields */
+.loginPage label {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #333;
 }
 
 .loginPage input {
@@ -29,4 +41,25 @@
     transition: border-color 0.2s ease;
     background-color: white;
     color: black;
+    margin-bottom: 0.25rem;
+}
+
+.loginPage button {
+    width: 100%;
+    margin-top: 0.25rem;
+    padding: 0.6rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.loginPage button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+}
+
+.loginPage button[type="submit"]:hover {
+    background-color: #0056b3;
 }
