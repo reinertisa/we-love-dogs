@@ -50,8 +50,8 @@ export default function LoginPage() {
                 <FormProvider {...formMethods}>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <h3>Log in to We Love Dogs</h3>
-                        <FormText name="name" label="Name" />
-                        <FormText name="email" label="Email" />
+                        <FormText name="name" label="Name" type="text" />
+                        <FormText name="email" label="Email" type="email" />
                         <Button type="submit">Login</Button>
                         {error && <ErrorMessage message={error} />}
                     </form>

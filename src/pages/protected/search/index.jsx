@@ -8,6 +8,9 @@ import ErrorMessage from "../../../components/errors/index.jsx";
 import {useNavigate} from "react-router";
 
 
+/**
+ * Render the dog search page.
+ */
 export default function SearchPage() {
     const [breedOptions, setBreedOptions] = useState([]);
     const [error, setError] = useState('');

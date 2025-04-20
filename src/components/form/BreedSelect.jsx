@@ -1,7 +1,14 @@
+import PropTypes from "prop-types";
 import Select from "react-select";
 import {useController} from "react-hook-form";
 import {customReactSelectStyles} from "../../constants.js";
 
+
+const propTypes = {
+    name: PropTypes.string.isRequired,
+    options: PropTypes.shape({label: PropTypes.string, value: PropTypes.string}).isRequired,
+    control: PropTypes.object.isRequired,
+};
 export default function BreedSelect({control, name, options}) {
     const {
         field: { onChange, value, ref },
@@ -28,3 +35,4 @@ export default function BreedSelect({control, name, options}) {
         </div>
     );
 }
+BreedSelect.propTypes = propTypes;

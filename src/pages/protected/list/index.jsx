@@ -1,6 +1,7 @@
 import Button from "../../../components/buttons/index.jsx";
 import {useEffect, useState} from "react";
 import TablePage from "./Table.jsx";
+import PropTypes from "prop-types";
 import axios from "axios";
 import {BASE_URL, ERROR_MSG} from "../../../constants.js";
 import Loading from "../../../components/loading/index.jsx";
@@ -15,6 +16,23 @@ const initialCounter = {
     next: 100,
 };
 
+
+const propTypes = {
+    searchResult: PropTypes.shape({
+        resultIds: PropTypes.arrayOf(PropTypes.string),
+        total: PropTypes.number,
+    }),
+    pending: PropTypes.bool,
+};
+/**
+ * Render the dog list page.
+ *
+ * @param {object} props - prop container
+ * @param {object} props.searchResult
+ * @param {boolean} props.pending
+ *
+ * @return {JSX.Element}
+ */
 export default function ListPage({searchResult, pending}) {
     const [data, setData] = useState(null);
     const [count, setCount] = useState(initialCounter);
@@ -122,3 +140,4 @@ export default function ListPage({searchResult, pending}) {
 
     return <div>{body}</div>;
 }
+ListPage.propTypes = propTypes;

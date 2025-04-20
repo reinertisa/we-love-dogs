@@ -1,8 +1,10 @@
 import {useLocation, useNavigate} from "react-router";
-
-import './Match.css';
 import Button from "../../../components/buttons/index.jsx";
+import './Match.css';
 
+/**
+ * Render the match dog page.
+ */
 export default function MatchPage() {
     const navigate = useNavigate();
     const location = useLocation();

@@ -3,8 +3,13 @@ import {customReactSelectStyles} from "../../constants.js";
 import AsyncSelect from "react-select/async";
 import zipcodes from '../../assets/zipcodes.json'
 import {filter, map, slice, startsWith} from "lodash";
+import PropTypes from "prop-types";
 
 
+const propTypes = {
+    name: PropTypes.string.isRequired,
+    control: PropTypes.object.isRequired,
+};
 export default function ZipCodeSelect({control, name}) {
     // Function to load zip code options
     const loadZipOptions = (inputValue) => {
@@ -59,3 +64,4 @@ export default function ZipCodeSelect({control, name}) {
         </div>
     );
 }
+ZipCodeSelect.propTypes = propTypes;

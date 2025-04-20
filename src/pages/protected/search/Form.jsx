@@ -11,6 +11,7 @@ import ErrorMessage from "../../../components/errors/index.jsx";
 import {useNavigate} from "react-router";
 import ListPage from "../list/index.jsx";
 import './Form.css'
+import PropTypes from "prop-types";
 
 
 const defaultValues = {
@@ -20,6 +21,18 @@ const defaultValues = {
     ageMax: '',
 };
 
+
+const propTypes = {
+    breedOptions: PropTypes.arrayOf(PropTypes.string),
+};
+/**
+ * Render the dog search form.
+ *
+ * @param {object} props - prop container
+ * @param {string} props.breedOptions
+ *
+ * @return {JSX.Element}
+ */
 export default function SearchForm({breedOptions}) {
     const [searchResult, setSearchResult] = useState({});
     const [pending, setPending] = useState(false);
@@ -88,3 +101,4 @@ export default function SearchForm({breedOptions}) {
         </>
     )
 }
+SearchForm.propTypes = propTypes;

@@ -7,10 +7,32 @@ import {
 } from '@tanstack/react-table';
 import {useState} from "react";
 import {filter} from "lodash";
-
 import './Table.css';
+import PropTypes from "prop-types";
 
 
+const propTypes = {
+    data: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        img: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        age: PropTypes.number.isRequired,
+        zip_code: PropTypes.string.isRequired,
+        breed: PropTypes.string.isRequired,
+    })),
+    setSelectedDogs: PropTypes.func,
+    selectedDogs: PropTypes.arrayOf(PropTypes.string),
+};
+/**
+ * Render the dog list table.
+ *
+ * @param {object} props - prop container
+ * @param {Array} props.data
+ * @param {Function} props.setSelectedDogs
+ * @param {string} props.selectedDogs
+ *
+ * @return {JSX.Element}
+ */
 export default function TablePage({data, setSelectedDogs, selectedDogs}) {
     const [sorting, setSorting] = useState([
         {id: 'name', asc: true},
@@ -138,3 +160,4 @@ export default function TablePage({data, setSelectedDogs, selectedDogs}) {
         </div>
     );
 }
+TablePage.propTypes = propTypes;

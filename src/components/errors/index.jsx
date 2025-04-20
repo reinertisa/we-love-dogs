@@ -1,5 +1,6 @@
 import {isObject} from 'lodash';
 import clsx from "clsx";
+import PropTypes from 'prop-types';
 
 import './index.css'
 
@@ -11,6 +12,13 @@ const defaultMessage = (
     </p>
 );
 
+const propTypes = {
+    title: PropTypes.node,
+    subtitle: PropTypes.node,
+    message: PropTypes.node,
+    className: PropTypes.string,
+    style: PropTypes.object,
+};
 export default function ErrorMessage({title, message, className, style, ...otherProps}) {
     if (!message) {
         return null;
@@ -44,3 +52,4 @@ export default function ErrorMessage({title, message, className, style, ...other
         </div>
     );
 }
+ErrorMessage.propTypes = propTypes;

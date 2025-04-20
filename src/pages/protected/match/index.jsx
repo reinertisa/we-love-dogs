@@ -5,9 +5,21 @@ import {BASE_URL, ERROR_MSG} from "../../../constants.js";
 import {useNavigate} from "react-router";
 import {useState} from "react";
 import ErrorMessage from "../../../components/errors/index.jsx";
-
 import './index.css';
+import PropTypes from "prop-types";
 
+
+const propTypes = {
+    selectedDogs: PropTypes.arrayOf(PropTypes.string),
+};
+/**
+ * Render the favorite dog page.
+ *
+ * @param {object} props - prop container
+ * @param {string} props.selectedDogs
+ *
+ * @return {JSX.Element}
+ */
 export default function FavoritePage({selectedDogs}) {
 
     const navigate = useNavigate();
@@ -51,3 +63,4 @@ export default function FavoritePage({selectedDogs}) {
         );
     }
 }
+FavoritePage.propTypes = propTypes;

@@ -6,7 +6,9 @@ import Button from "../../../components/buttons/index.jsx";
 import ErrorMessage from "../../../components/errors/index.jsx";
 import './index.css';
 
-
+/**
+ * Render the navbar.
+ */
 export default function Navbar() {
     const[isLoggedOut, setLoggedOut] = useState(false);
     const [error, setError] = useState(null);
